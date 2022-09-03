@@ -8,3 +8,7 @@ class BodyParts(Enum, settings=(NoAlias)):
     LOWER_BODY = 4
     UPPER_BODY = 7
     HEAD = 8
+
+    @property
+    def is_core(self):
+        return self in [BodyParts.LOWER_BODY, BodyParts.UPPER_BODY, BodyParts.HEAD]
