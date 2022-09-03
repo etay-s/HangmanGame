@@ -37,5 +37,5 @@ if __name__ == '__main__':
             else:
                 mistakes.append(letter)
         else:
-            print('error')
+            print('Already tried this letter...')
     print('complete')
