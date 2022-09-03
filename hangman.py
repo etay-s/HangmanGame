@@ -1,23 +1,22 @@
 import heapq
-from importlib.abc import PathEntryFinder
 from body_parts import BodyParts as bp
 from part import Part
-from sketches import Sketch
+from sketch import Sketch
 
 import os
 from time import sleep
 
 class Hangman:
-    _sketch = Sketch.hanged_man()
-    _parts = {part: Part(part) for part in bp}
-    _hangman_body = [(part.rank, part) for part in _parts.values()]
-    heapq.heapify(_hangman_body)
+    def __init__(self) -> None:
+        self._parts = {part: Part(part) for part in bp}
+        self._hangman_body = [(part.rank, part) for part in self._parts.values()]
+        heapq.heapify(self._hangman_body)
 
-    def show_hangman(self):
+    def show_sketch(self):
         return '\n'.join(''.join(line) for line in self._sketch)
 
     def lose_part(self, part=None):
-        dropped_parts = []
+        lost_parts = []
         if part:
             if part == bp.LOWER_BODY:
                 lower_body_rank = self._parts[bp.LOWER_BODY].rank
@@ -29,7 +28,9 @@ class Hangman:
                 _, dropped_part = heapq.heappop(self._hangman_body)
                 self.detach_part(dropped_part)
         _,  lost_part = heapq.heappop(self._hangman_body)
-        self.detach_part(lost_part)
+        lost_parts.append(lost_part)
+        lost_part.detach()
+        return lost_parts
 
     def detach_part(self, part: Part):
         part.detach()
@@ -41,6 +42,7 @@ class Hangman:
         self._sketch[y][x] = ' '
         
 
+# ----------------------------------------------------------------------
 def show():
     os.system('clear') if os.name == 'posix' else os.system('cls')
     print(hm.show_hangman())
@@ -59,6 +61,5 @@ if __name__ == '__main__':
     #     step()
     # step(bp.HEAD)
 
-    # priorities parts - heapq
     # risk leves - low, medium, high, all or nothing
     # remove by risk and drop lower priorities
