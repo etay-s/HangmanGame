@@ -9,7 +9,7 @@ class Sketch:
     @property
     def sketch(self):
         return self._sketch
-    
+
     @sketch.setter
     def sketch(self, value):
         self._sketch = copy.deepcopy(value)
@@ -27,10 +27,10 @@ class Sketch:
 
     @classmethod
     def man_sketch(cls):
-        dimensions = cs.PERSON['dimensions']
+        dimensions = cs.HANGMAN['dimensions']
         sketch = [[' '] * dimensions[1] for _ in range(dimensions[0])]
         for part in bp:
-            part_value = cs.PERSON[part]
+            part_value = cs.HANGMAN[part]
             sketch[part_value[0]][part_value[1]] = part_value[2]
         return sketch
 
