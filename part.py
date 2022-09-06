@@ -19,7 +19,7 @@ class Part:
     @property
     def attached(self):
         return self._attached
-    
+
     def detach(self):
         self._attached = False
 
