@@ -1,6 +1,8 @@
 from body_parts import BodyParts as bp
 from sketch_blueprint import Blueprint
 
+# TODO: Use box drawing unicode characters
+
 EMPTY = ' '
 
 HANGMAN = {
@@ -14,21 +16,7 @@ HANGMAN = {
         bp.LEFT_LEG: Blueprint(3,0,'/'),
         bp.RIGHT_LEG: Blueprint(3,2,'\\')
     }
-    
-    }
-
-# TODO: Simplify to specification form (e.g. PERSON above)
-# TODO: Use box drawing unicode characters
-GALLOW = [
-        [' ',' ',' ','_','_','_','_','_','_','_','_','_'],
-        [' ',' ',' ','|',' ',' ',' ',' ',' ',' ',' ','|'],
-        [' ',' ',' ','|',' ',' ',' ',' ',' ',' '],
-        [' ',' ',' ','|',' ',' ',' ',' ',' ',' '],
-        [' ',' ',' ','|',' ',' ',' ',' ',' ',' '],
-        [' ',' ',' ','|',' ',' ',' ',' ',' ',' '],
-        [' ',' ',' ','|',' ',' ',' ',' ',' ',' '],
-        ['_','_','_','|','_','_','_',' ',' ',' ']
-    ]
+}
 
 GALLOWS = {
     'dimensions': (8,12),

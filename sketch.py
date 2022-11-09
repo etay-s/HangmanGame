@@ -14,6 +14,8 @@ class Sketch:
     def sketch(self, value):
         self._sketch = copy.deepcopy(value)
 
+
+    # TODO: Finish modifying to support sketch flexibility
     # @classmethod
     # def connect_sketches(cls, base_sketch, connect_sketch, start_row = 0, start_column = 0):
     #     result_sketch = copy.deepcopy(base_sketch)
@@ -25,6 +27,8 @@ class Sketch:
     #                 # result_sketch = 
     #                 pass
 
+
+    # TODO: Replace with above function
     @classmethod
     def connect_sketches(cls, base_sketch, connect_sketch, start_row = 0):
         connected_sketch = []

@@ -4,7 +4,6 @@ class Words:
     def __init__(self):
         self._url = "https://wordsapiv1.p.rapidapi.com/words/"
         self._headers = {
-            # TODO: Setup .env file to hold API key
             # FIXME: Insert the new API KEY
             "X-RapidAPI-Key": "",
             "X-RapidAPI-Host": "wordsapiv1.p.rapidapi.com"
