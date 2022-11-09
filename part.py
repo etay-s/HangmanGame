@@ -2,8 +2,7 @@ from random import sample
 from body_parts import BodyParts
 
 class Part:
-    # TODO: Generalize range(?)
-    _tie_breaker = (r for r in sample(range(4),4))
+    _tie_breaker = (r for r in sample(range(BodyParts.RANDOM_PARTS),BodyParts.RANDOM_PARTS))
 
     def __init__(self, kind: BodyParts) -> None:
         self._kind = kind
@@ -27,7 +26,7 @@ class Part:
     def rank(self):
         return self._rank
 
-    # TODO: Add inuput validation and error
+    # TODO: Add input validation and error
     @rank.setter
     def rank(self, value):
         self._rank = value

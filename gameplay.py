@@ -16,11 +16,12 @@ class Gameplay():
         for lost_part in lost_parts:
             y_coord, x_coord, _ = cs.HANGMAN[part.kind]
             # TODO: Generalize according to Sketch specs
-            self._sketch.sketch[y_coord + 2][x_coord + 10] = ' '
+            self._sketch.sketch[y_coord + 2][x_coord + 10] = cs.EMPTY
 
     def drop_part(self, part, x_coord, y_coord):
         self._sketch.sketch[y_coord + 1][x_coord] = self._sketch.sketch[y_coord][x_coord]
-        self._sketch.sketch[y_coord][x_coord] = ' '
+        self._sketch.sketch[y_coord][x_coord] = cs.EMPTY
 
 if __name__ == '__main__':
     game = Gameplay()
+    print(game.show_sketch())

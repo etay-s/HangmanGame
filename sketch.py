@@ -14,24 +14,46 @@ class Sketch:
     def sketch(self, value):
         self._sketch = copy.deepcopy(value)
 
-    # TODO: 1) Rephrase error message
-    # TODO: 2) Add inuput validation and error
-    @classmethod
-    def connect_sketches(cls, sketch1, sketch2, start_row = 0):
-        connected_sketch = []
-        if len(sketch1) >= start_row + len(sketch2):
-            for row1, row2 in zip(sketch1[start_row:start_row + len(sketch2)], sketch2):
-                connected_sketch.append(row1 + row2)
-            return sketch1[:start_row] + connected_sketch + sketch1[start_row + len(sketch2):]
-        raise ValueError("start_row pushes sketch2 out of sketch1 bounds")
+    # @classmethod
+    # def connect_sketches(cls, base_sketch, connect_sketch, start_row = 0, start_column = 0):
+    #     result_sketch = copy.deepcopy(base_sketch)
+    #     if (len(base_sketch) >= start_row + len(connect_sketch)
+    #         and len(base_sketch[0]) >= start_column + len(connect_sketch[0])
+    #         ):
+    #         for y in range(start_row, len(connect_sketch)):
+    #             for x in range(start_column, len(connect_sketch[0])):
+    #                 # result_sketch = 
+    #                 pass
 
+    @classmethod
+    def connect_sketches(cls, base_sketch, connect_sketch, start_row = 0):
+        connected_sketch = []
+        if len(base_sketch) >= start_row + len(connect_sketch):
+            for row1, row2 in zip(base_sketch[start_row:start_row + len(connect_sketch)], connect_sketch):
+                connected_sketch.append(row1 + row2)
+            return base_sketch[:start_row] + connected_sketch + base_sketch[start_row + len(connect_sketch):]
+        raise ValueError("Connect sketch goes out of bounds of base sketch")
+
+    #TODO: Genralize into one method (i.e. input type of sketch)
     @classmethod
     def man_sketch(cls):
         dimensions = cs.HANGMAN['dimensions']
-        sketch = [[' '] * dimensions[1] for _ in range(dimensions[0])]
-        for part in bp:
-            part_value = cs.HANGMAN[part]
-            sketch[part_value[0]][part_value[1]] = part_value[2]
+        sketch = [[cs.EMPTY] * dimensions[1] for _ in range(dimensions[0])]
+        for part in cs.HANGMAN['elements'].values():
+            sketch[part.y][part.x] = part.character
+        return sketch
+
+    @classmethod
+    def gallows_sketch(cls):
+        dimensions = cs.GALLOWS['dimensions']
+        sketch = [[cs.EMPTY] * dimensions[1] for _ in range(dimensions[0])]
+        for part in cs.GALLOWS['elements'].values():
+            if part.direction:
+                for count in range(part.count):
+                    sketch[part.y + count][part.x] = part.character
+            else:
+                for count in range(part.count):
+                    sketch[part.y][part.x + count] = part.character
         return sketch
 
     @classmethod
@@ -42,4 +64,4 @@ class Sketch:
     @classmethod
     def hanged_man(cls):
         sketch = Sketch.man_sketch()
-        return Sketch.connect_sketches(cs.GALLOWS, sketch, 2)
+        return Sketch.connect_sketches(Sketch.gallows_sketch(), sketch, 2)

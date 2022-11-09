@@ -1,4 +1,4 @@
-from aenum import Enum, NoAlias
+from aenum import Enum, NoAlias, constant
 
 class BodyParts(Enum, settings=(NoAlias)):
     LEFT_LEG = 0
@@ -8,6 +8,7 @@ class BodyParts(Enum, settings=(NoAlias)):
     LOWER_BODY = 4
     UPPER_BODY = 7
     HEAD = 8
+    RANDOM_PARTS = constant(4)
 
     @property
     def is_core(self):
